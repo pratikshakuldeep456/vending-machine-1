@@ -3,6 +3,7 @@ package main
 import (
 	"pratikshakuldeep456/vending-machine/pkg/item"
 	"pratikshakuldeep456/vending-machine/pkg/machine"
+	"pratikshakuldeep456/vending-machine/pkg/payment"
 )
 
 func main() {
@@ -24,5 +25,19 @@ func main() {
 
 	newVendingMachine.DisplayItem()
 
-	newVendingMachine.DispenseItem("Ankit", 1)
+	//payment
+
+	payments := &payment.PaymentContext{
+		Item: item.Item{
+			Count: 4,
+			Code:  "Ankit",
+			Price: 10,
+		},
+	}
+	coin := &payment.Card{}
+
+	payments.SetMethod(coin)
+	payments.Checkout()
+
+	newVendingMachine.DispenseItem(payments.Item.Code, payments.Item.Count)
 }

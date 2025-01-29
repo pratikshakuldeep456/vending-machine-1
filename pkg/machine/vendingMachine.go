@@ -2,14 +2,13 @@ package machine
 
 import (
 	"fmt"
+	"pratikshakuldeep456/vending-machine/pkg/balance"
 	"pratikshakuldeep456/vending-machine/pkg/item"
 )
 
 type VendingMachine struct {
 	Items    []item.Item
-	Balances Balance
-}
-type Balance struct {
+	Balances balance.Balance
 }
 
 func (vm *VendingMachine) AddItems(item item.Item) {
@@ -27,6 +26,8 @@ func (vm *VendingMachine) DisplayItem() []item.Item {
 }
 
 func (vm *VendingMachine) DispenseItem(code string, quantity int) {
+	fmt.Println(
+		"dispense method called")
 	for _, v := range vm.Items {
 		if v.Code == code {
 			err := v.RemoveQuantity(quantity)
@@ -35,7 +36,7 @@ func (vm *VendingMachine) DispenseItem(code string, quantity int) {
 				return
 			}
 			fmt.Println("Dispensing item: ", code)
-			return
+
 		}
 	}
 }
