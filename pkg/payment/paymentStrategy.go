@@ -2,16 +2,21 @@ package payment
 
 import (
 	"fmt"
-	"pratikshakuldeep456/vending-machine/pkg/item"
 )
 
 type PaymentStrategy interface {
 	PayAmount(amount int)
 }
 
+type ProductItem struct {
+	Amount   int
+	Code     string
+	Quantity int
+}
+
 type PaymentContext struct {
 	PaymentMethod PaymentStrategy
-	Item          item.Item
+	Product       ProductItem
 }
 
 func (p *PaymentContext) SetMethod(ps PaymentStrategy) {
@@ -23,6 +28,6 @@ func (p *PaymentContext) Checkout() {
 
 	fmt.Println("checkout started ")
 
-	p.PaymentMethod.PayAmount(p.Item.Price * p.Item.Count)
+	p.PaymentMethod.PayAmount(p.Product.Amount)
 
 }

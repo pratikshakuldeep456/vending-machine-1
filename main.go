@@ -25,19 +25,17 @@ func main() {
 
 	newVendingMachine.DisplayItem()
 
-	//payment
-
+	p1 := payment.ProductItem{
+		Amount:   100,
+		Code:     "Ankitt",
+		Quantity: 1,
+	}
 	payments := &payment.PaymentContext{
-		Item: item.Item{
-			Count: 4,
-			Code:  "Ankit",
-			Price: 10,
-		},
+		Product: p1,
 	}
 	coin := &payment.Card{}
-
 	payments.SetMethod(coin)
 	payments.Checkout()
 
-	newVendingMachine.DispenseItem(payments.Item.Code, payments.Item.Count)
+	newVendingMachine.DispenseItem(p1)
 }
